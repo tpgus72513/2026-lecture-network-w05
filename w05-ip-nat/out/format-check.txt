@@ -2,8 +2,8 @@
 
   [ok]     addresses.json       two or more labelled networks  (33,708 bytes)
   [ok]     dhcp.pcapng          your own DORA capture  (3,524 bytes)
-  [ok]     report.md            the address analysis  (18,455 bytes)
+  [ok]     report.md            the address analysis  (18,457 bytes)
   [ok]     bench.txt            python3 bench.py --yours  (265 bytes)
-  [ok]     observation.md       2-3 lines per task  (3,201 bytes)
+  [ok]     observation.md       2-3 lines per task  (1,246 bytes)
 
   Format check passed. Whether it is right is up to you.
