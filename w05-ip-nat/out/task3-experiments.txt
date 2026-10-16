@@ -1,0 +1,14 @@
+== 1. correctness beyond bench.py
+  30 trials x 400 shuffled routes (/0-/32, 5% duplicates) x 6000 queries: 0 wrong
+
+== 2. bench.py table: 5,000 prefixes, 20,000 queries
+  LinearTable              lookup   13.258s        1,508/s     1.0x  memory   0.76 MB
+  LengthHash (by length)   lookup    0.007s    2,848,556/s   1888.4x  memory   0.61 MB  build 0.01s  wrong 0
+  BitTrie (1 bit/step)     lookup    0.055s      366,300/s    242.8x  memory   4.89 MB  build 0.03s  wrong 0
+  YourTable (16-8-8)       lookup    0.004s    5,533,575/s   3668.3x  memory  18.43 MB  build 0.04s  wrong 0
+
+== 3. work per lookup
+  prefix lengths present: [24, 22, 20, 16, 12, 8, 0]
+  LengthHash: dict probes per lookup, mean 2.61, worst 7
+  BitTrie: 52,862 nodes; nodes visited per lookup, mean 20.4, worst 32
+  YourTable: 4,008 level-2 nodes, 0 level-3 nodes; 5,562 of 20,000 queries answered after 1 index, the rest after 2; worst 3

@@ -1,0 +1,21 @@
+== home Wi-Fi
+  address 192.168.219.108  mask 255.255.255.0 (/24)  -> private (RFC 1918)
+  network 192.168.219.108 AND 255.255.255.0 = 192.168.219.0/24
+  network_range -> first 192.168.219.1  last 192.168.219.254  broadcast 192.168.219.255  (254 usable)
+  gateway 192.168.219.1 inside 192.168.219.0/24: True
+
+== phone hotspot (both runs)
+  address 10.155.204.215  mask 255.255.255.0 (/24)  -> private (RFC 1918)
+  network 10.155.204.215 AND 255.255.255.0 = 10.155.204.0/24
+  network_range -> first 10.155.204.1  last 10.155.204.254  broadcast 10.155.204.255  (254 usable)
+  gateway 10.155.204.132 inside 10.155.204.0/24: True
+
+== other addresses seen
+  124.52.76.47     public, home             public
+  124.52.76.1      home traceroute hop 2    public
+  118.235.25.102   public, phone LTE        public
+  192.0.0.3        LTE traceroute hop 2     IPv4 service continuity, 464XLAT (RFC 7335)
+  10.203.14.61     home traceroute hop 3    private (RFC 1918)
+  100.107.3.53     home traceroute hop 4    shared / carrier-grade NAT (RFC 6598)
+  100.112.140.37   Tailscale adapter        shared / carrier-grade NAT (RFC 6598)
+  124.52.76.1 and 124.52.76.47 share a /24: True

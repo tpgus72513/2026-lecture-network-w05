@@ -1,0 +1,26 @@
+== R1/R2 parse_cidr rejects
+  10.0.0.0/33                        -> rejected: prefix length 33 outside 0-32: '10.0.0.0/33'
+  10.0.0.0/-1                        -> rejected: missing or bad prefix length: '10.0.0.0/-1'
+  10.0.0.0                           -> rejected: missing or bad prefix length: '10.0.0.0'
+  163.152.6.5/24                     -> rejected: host bits set, '163.152.6.5/24' is a host, not a network
+  256.0.0.0/8                        -> rejected: bad octet '256' in '256.0.0.0'
+  10.0.0/8                           -> rejected: not a dotted quad: '10.0.0'
+
+== R3 network_range at the edges
+  0.0.0.0/0                          -> ('0.0.0.1', '255.255.255.254', '255.255.255.255')
+  192.168.0.0/30                     -> ('192.168.0.1', '192.168.0.2', '192.168.0.3')
+  192.168.0.0/31                     -> ('192.168.0.0', '192.168.0.1', None)
+  192.168.0.7/32                     -> ('192.168.0.7', '192.168.0.7', None)
+
+== R4/R5 every entry 10.20.30.70 falls inside, longest first
+  /26  10.20.30.64    -> lab-rack-2
+  /24  10.20.30.0     -> lab-floor
+  /16  10.20.0.0      -> eng-building
+  /8   10.0.0.0       -> campus
+  /0   0.0.0.0        -> default-gw
+  lookup picks -> lab-rack-2
+
+== same prefix, same length, twice
+  add 10.20.30.0/24 lab-floor again  -> None
+  add 10.20.30.0/24 somewhere-else   -> rejected: 10.20.30.0/24 already points to 'lab-floor', refusing a second next hop 'somewhere-else'
+  lookup 10.20.30.10 still -> lab-floor
